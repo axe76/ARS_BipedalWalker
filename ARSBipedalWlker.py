@@ -7,7 +7,6 @@ from gym import wrappers
 episode_length = 2000
 lr = 0.02
 num_dirs = 16
-total_episodes = 2000
 num_dirs_best = 16
 noise = 0.03
 
@@ -73,7 +72,7 @@ def play_one(env,normalizer,policy,direction = None,delta = None):
         n_steps+=1
     return total_reward
 
-def train(env,policy,normalizer,epochs,lr,n_dirs,total_episodes,n_dirs_best,noise = 0.03):
+def train(env,policy,normalizer,epochs,lr,n_dirs,n_dirs_best,noise = 0.03):
     for epoch in range(epochs):
         deltas = policy.sample_deltas()
         positive_rewards = [0] * n_dirs
@@ -101,7 +100,7 @@ if __name__ == '__main__':
     env = gym.wrappers.Monitor(env,'Episode',force=True)   
     policy = Policy(env.observation_space.shape[0],env.action_space.shape[0],lr,num_dirs,num_dirs_best,noise)
     normalizer = Normalizer(env.observation_space.shape[0])
-    train(env,policy,normalizer,1000,lr,num_dirs,total_episodes,num_dirs_best,noise)
+    train(env,policy,normalizer,1000,lr,num_dirs,num_dirs_best,noise)
     
 
 
