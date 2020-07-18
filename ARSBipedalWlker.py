@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May 27 11:45:37 2020
-
-@author: ACER
-""" 
 
 import os
 import gym
@@ -104,7 +98,7 @@ def train(env,policy,normalizer,epochs,lr,n_dirs,total_episodes,n_dirs_best,nois
 if __name__ == '__main__':
     np.random.seed(1)
     env = gym.make('BipedalWalker-v2')
-    env = gym.wrappers.Monitor(env,'Runs1',force=True)   
+    env = gym.wrappers.Monitor(env,'Episode',force=True)   
     policy = Policy(env.observation_space.shape[0],env.action_space.shape[0],lr,num_dirs,num_dirs_best,noise)
     normalizer = Normalizer(env.observation_space.shape[0])
     train(env,policy,normalizer,1000,lr,num_dirs,total_episodes,num_dirs_best,noise)
